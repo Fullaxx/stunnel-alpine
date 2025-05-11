@@ -7,7 +7,7 @@ A small docker image running stunnel-server
 ## Software
 [stunnel](https://www.stunnel.org/) - A GPL licensed FTP server
 
-## Get the image from Docker Hub or build it locally
+## Get the image from DockerHub or build it locally
 ```
 docker pull fullaxx/stunnel-alpine
 docker build -t="fullaxx/stunnel-alpine" github.com/Fullaxx/stunnel-alpine
@@ -52,21 +52,21 @@ Run the image listening on 76.51.51.84:443 and connecting to 172.17.0.1:80 using
 docker run -d \
 -p 76.51.51.84:443:443 -e ACCEPT=443 -e CONNECT=172.17.0.1:80 \
 -v /srv/docker/mydomain/mycerts:/certs -e CERTKEYFILE=stunnel.pem \
-fullaxx/stunnel-server
+fullaxx/stunnel-alpine
 ```
 Run the image listening on 76.51.51.84:443 and connecting to 172.17.0.1:80 using seperate PEM files
 ```
 docker run -d \
 -p 76.51.51.84:443:443 -e ACCEPT=443 -e CONNECT=172.17.0.1:80 \
 -v /srv/docker/mydomain/mycerts:/certs -e CERTFILE=stunnel.crt -e KEYFILE=stunnel.key \
-fullaxx/stunnel-server
+fullaxx/stunnel-alpine
 ```
 Run the image with host networking
 ```
 docker run -d \
 --network=host -e ACCEPT=76.51.51.84:443 -e CONNECT=172.17.0.1:80 \
 -v /certs:/certs -e CERTKEYFILE=certkey.pem \
-fullaxx/stunnel-server
+fullaxx/stunnel-alpine
 ```
 
 ## Create a self-signed certificate
