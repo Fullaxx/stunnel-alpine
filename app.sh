@@ -48,10 +48,15 @@ echo "pid = /run/stunnel/stunnel.pid" >>${CONFIG}
 echo "socket = l:TCP_NODELAY=1" >>${CONFIG}
 echo "socket = r:TCP_NODELAY=1" >>${CONFIG}
 
-# Some debugging stuff useful for troubleshooting
+# Debugging/Logging
 echo "foreground = yes" >>${CONFIG}
-#echo "debug = 7" >>${CONFIG}
-#echo "output = stunnel.log" >>${CONFIG}
+if [ -n "${DEBUG}" ]; then
+  echo "debug = ${DEBUG}" >>${CONFIG}
+fi
+if [ -n "${LOGFILE}" ]; then
+  chown stunnel:stunnel /log
+  echo "output = /log/${LOGFILE}" >>${CONFIG}
+fi
 
 # Service-level configuration
 echo "[server]" >>${CONFIG}

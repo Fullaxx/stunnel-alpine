@@ -5,7 +5,7 @@ A small docker image running stunnel-server
 [Alpine](https://hub.docker.com/_/alpine) (x64)
 
 ## Software
-[stunnel](https://www.stunnel.org/) - A GPL licensed FTP server
+[stunnel](https://www.stunnel.org/) - A GPL licensed SSL proxy
 
 ## Get the image from DockerHub or build it locally
 ```
@@ -40,11 +40,10 @@ You can provide a certificate file along with a seperate key file:
 ```
 
 ## Logging Options
-By default, logging will be done on stdout/stderr. \
+By default, logging will be done to stdout/stderr. \
 If you would like to see the stunnel logs on your host machine
 ```
-FIXME NOT COMPLETE
--v /srv/docker/stunnel4/logs:/var/log/stunnel4
+-v /srv/docker/mydomain/mylogs:/log -e LOGFILE=stunnel.log
 ```
 
 ## Run the image
