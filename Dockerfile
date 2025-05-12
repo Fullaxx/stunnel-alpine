@@ -5,7 +5,7 @@ LABEL author="Brett Kuskie <fullaxx@gmail.com>"
 
 # ------------------------------------------------------------------------------
 # Prepare the image
-RUN apk update && apk add bash stunnel && rm /etc/stunnel/stunnel.conf
+RUN apk update && apk add stunnel && rm /etc/stunnel/stunnel.conf
 COPY app.sh /app/
 
 # ------------------------------------------------------------------------------

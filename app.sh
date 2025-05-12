@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/ash
 
 bail()
 {
@@ -17,26 +17,21 @@ fi
 CONFIG="/etc/stunnel/stunnel.conf"
 
 # Certificate/Key is needed in server mode and optional in client mode
-if [ -n "${CERTKEYFILE}" ]; then
-  CERTKEYPATH="/certs/${CERTKEYFILE}"
-  if [ ! -r ${CERTKEYPATH} ]; then
-    bail "${CERTKEYPATH} is not readable!"
+cfgadd()
+{
+  FILEPATH="/certs/$2"
+  if [ ! -r ${FILEPATH} ]; then
+    bail "${FILEPATH} is not readable!"
   fi
-  echo "cert = ${CERTKEYPATH}" >>${CONFIG}
-  echo "key = ${CERTKEYPATH}" >>${CONFIG}
-elif [ -n "${CERTFILE}" ] && [ -n "${KEYFILE}" ]; then
-  CERTPATH="/certs/${CERTFILE}"
-  KEYPATH="/certs/${KEYFILE}"
-  if [ ! -r ${CERTPATH} ]; then
-    bail "${CERTPATH} is not readable!"
-  fi
-  if [ ! -r ${KEYPATH} ]; then
-    bail "${KEYPATH} is not readable!"
-  fi
-  echo "cert = ${CERTPATH}" >>${CONFIG}
-  echo "key = ${KEYPATH}" >>${CONFIG}
-else
-  bail "Unknown Configuration!"
+  echo "$1 = ${FILEPATH}" >>${CONFIG}
+}
+
+if [ -n "${CERTFILE}" ]; then
+  cfgadd "cert" "${CERTFILE}"
+fi
+
+if [ -n "${KEYFILE}" ]; then
+  cfgadd "key" "${KEYFILE}"
 fi
 
 # Security

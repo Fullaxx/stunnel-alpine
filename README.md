@@ -31,7 +31,8 @@ There are 2 ways to provide certificate/key files to stunnel \
 In both cases the files must be provided in a volume called /certs \
 You can provide a single key+certificate pem file:
 ```
--v /srv/docker/mydomain/mycerts:/certs -e CERTKEYFILE=stunnel.pem
+-v /srv/docker/mydomain/mycerts:/certs -e CERTFILE=stunnel.pem
+-v /srv/docker/mydomain/mycerts:/certs -e CERTFILE=stunnel.pem -e KEYFILE=stunnel.pem
 ```
 You can provide a certificate file along with a seperate key file:
 ```
@@ -51,7 +52,7 @@ Run the image listening on 76.51.51.84:443 and connecting to 172.17.0.1:80 using
 ```
 docker run -d \
 -p 76.51.51.84:443:443 -e ACCEPT=443 -e CONNECT=172.17.0.1:80 \
--v /srv/docker/mydomain/mycerts:/certs -e CERTKEYFILE=stunnel.pem \
+-v /srv/docker/mydomain/mycerts:/certs -e CERTFILE=stunnel.pem \
 fullaxx/stunnel-alpine
 ```
 Run the image listening on 76.51.51.84:443 and connecting to 172.17.0.1:80 using seperate PEM files
@@ -65,7 +66,7 @@ Run the image with host networking
 ```
 docker run -d \
 --network=host -e ACCEPT=76.51.51.84:443 -e CONNECT=172.17.0.1:80 \
--v /certs:/certs -e CERTKEYFILE=certkey.pem \
+-v /srv/docker/mydomain/mycerts:/certs -e CERTFILE=stunnel.pem \
 fullaxx/stunnel-alpine
 ```
 
@@ -75,6 +76,7 @@ For a quick example on SSL certificate creation, [go here](CERTIFICATE_CREATION.
 ## Posting Issues on Github
 When posting issues, please provide the following:
 * docker run line used to create the container
+* stunnel config file: docker exec -it <CONTAINER> cat /etc/stunnel/stunnel.conf
 * output from docker logs
 * screenshot showing the issue if not described in logs
 * any other relevant networking information
