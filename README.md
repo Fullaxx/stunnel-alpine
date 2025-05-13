@@ -75,7 +75,7 @@ For a quick example on SSL certificate creation, [go here](CERTIFICATE_CREATION.
 ## Posting Issues on Github
 When posting issues, please provide the following:
 * docker run line used to create the container
-* stunnel config file: docker exec -it <CONTAINER> cat /etc/stunnel/stunnel.conf
+* stunnel config file: docker exec -it CONTAINER cat /etc/stunnel/stunnel.conf
 * output from docker logs
 * screenshot showing the issue if not described in logs
 * any other relevant networking information
